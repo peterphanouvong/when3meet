@@ -4,14 +4,16 @@ import BaseButton from "./BaseButton.vue";
 
 <template>
   <nav class="c-Navbar">
-    <BaseButton as="link" href="/">Schedule an Event</BaseButton>
+    <BaseButton as="link" variant="outline" href="/"
+      >Schedule an Event</BaseButton
+    >
     <BaseButton as="link" variant="ghost" href="/about">About</BaseButton>
   </nav>
 </template>
 
 <style scoped>
 .c-Navbar {
-  padding: 1rem 2rem;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;

@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import BaseInput from "./BaseInput.vue";
 import BaseButton from "./BaseButton.vue";
+import BaseSelect from "./BaseSelect.vue";
 
 const eventName = ref<string>("");
 const timeType = ref<"week" | "period">("week");
@@ -19,39 +20,53 @@ const onSubmit = () => {
 </script>
 
 <template>
-  <form @submit.prevent="onSubmit">
+  <form class="c-EventCreateForm" @submit.prevent="onSubmit">
     <BaseInput
+      class="c-EventCreateForm__item c-EventCreateForm__title"
       :value="eventName"
       @input="eventName = $event"
+      label="Event name"
       type="text"
-      placeholder="Event name"
     />
 
-    <p>
+    <p class="c-EventCreateForm__item">
       When are you free
-      <select v-model="timeType">
+      <BaseSelect :value="timeType" @change="timeType = $event">
         <option value="week">during the week</option>
         <option value="period">in this time period</option>
-      </select>
+      </BaseSelect>
       ?
     </p>
 
-    <p>
+    <p class="c-EventCreateForm__item">
       No earlier than
-      <select v-model="startTime">
+      <BaseSelect :value="startTime" @change="startTime = $event">
         <option value="init">9:00am</option>
-      </select>
+      </BaseSelect>
     </p>
 
-    <p>
+    <p class="c-EventCreateForm__item">
       No later than
-      <select v-model="endTime">
+      <BaseSelect :value="endTime" @change="endTime = $event">
         <option value="init">10:00pm</option>
-      </select>
+      </BaseSelect>
     </p>
 
-    <BaseButton type="submit">Create event!</BaseButton>
+    <BaseButton class="c-EventCreateForm__item" type="submit"
+      >Create event!</BaseButton
+    >
   </form>
 </template>
 
-<style scoped></style>
+<style scoped>
+.c-EventCreateForm {
+  width: 100%;
+}
+.c-EventCreateForm__item {
+  margin-bottom: 1rem;
+}
+
+.c-EventCreateForm__title {
+  align-self: center;
+}
+</style>

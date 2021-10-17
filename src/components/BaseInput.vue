@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { defineProps, defineEmits } from "vue";
-
 interface Props {
   value?: string;
+  label: string;
 }
 // v-bind="props"
 
@@ -15,16 +14,41 @@ const onInput = (event: any) => {
 </script>
 
 <template>
-  <input type="text" :value="props.value" @input="onInput" class="c-Input" />
+  <div class="c-InputWrapper">
+    <label for="" class="c-InputLabel">{{ label }}</label>
+    <input type="text" :value="props.value" @input="onInput" class="c-Input" />
+  </div>
 </template>
 
 <style scope>
+.c-InputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.c-InputLabel {
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
 .c-Input {
   border: 1px solid var(--black-10);
   border-radius: 3px;
+  color: var(--black-60);
+  font-size: 1rem;
   outline: none;
-  padding: 0.5rem;
-  text-align: center;
+  padding: 0.5rem 0.7rem;
+  transition: 0.2s ease;
+  width: 100%;
+}
+
+.c-Input:hover {
+  border: 1px solid var(--black-30);
+}
+
+.c-Input:focus {
+  border: 1px solid var(--black-30);
+  outline: var(--black-0) solid 2px;
 }
 
 .c-Input::placeholder {

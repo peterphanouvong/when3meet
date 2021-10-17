@@ -11,10 +11,15 @@ import EventCreateForm from "./EventCreateForm.vue";
 
 <style scoped>
 .c-HomePage {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 400px;
+  margin: auto;
+  padding: 1rem;
 }
-
 .c-HomePage__title {
   margin-bottom: 1rem;
+  text-align: center;
 }
 </style>

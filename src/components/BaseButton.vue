@@ -44,7 +44,7 @@ const props = withDefaults(defineProps<Props>(), {
 .c-BaseButton {
   border-radius: 3px;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 1rem;
   padding: 0.5rem 1rem;
   transition: 0.2s ease;
 }
