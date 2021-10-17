@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import BaseInput from "./BaseInput.vue";
+import BaseButton from "./BaseButton.vue";
 
 const eventName = ref<string>("");
 const timeType = ref<"week" | "period">("week");
@@ -11,14 +13,19 @@ const onSubmit = () => {
     eventName: eventName.value,
     timeType: timeType.value,
     startTime: startTime.value,
-    endTime: endTime.value,
+    endTime: endTime.value
   });
 };
 </script>
 
 <template>
   <form @submit.prevent="onSubmit">
-    <input v-model="eventName" type="text" placeholder="Event name" />
+    <BaseInput
+      :value="eventName"
+      @input="eventName = $event"
+      type="text"
+      placeholder="Event name"
+    />
 
     <p>
       When are you free
@@ -43,7 +50,7 @@ const onSubmit = () => {
       </select>
     </p>
 
-    <button type="submit">Create event!</button>
+    <BaseButton type="submit">Create event!</BaseButton>
   </form>
 </template>
 

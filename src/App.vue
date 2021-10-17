@@ -12,7 +12,18 @@ import HomePage from "./components/HomePage.vue";
 @import url("./styles/reset.css");
 
 :root {
-  --black: #2c3e50;
+  --black-100: #1c1529;
+  --black-90: #1e1a33;
+  --black-80: #20223d;
+  --black-70: #262f47;
+  --black-60: #2c3e50;
+  --black-50: #485e68;
+  --black-40: #637c80;
+  --black-30: #7f9796;
+  --black-20: #9bafaa;
+  --black-10: #b8c6c0;
+  --black-5: #d4ddd7;
+  --black-0: #ebeeee;
 }
 
 #app {

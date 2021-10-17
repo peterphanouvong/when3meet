@@ -4,12 +4,8 @@ import BaseButton from "./BaseButton.vue";
 
 <template>
   <nav class="c-Navbar">
-    <BaseButton>
-      <router-link to="/">Create an Event</router-link>
-    </BaseButton>
-
-    <router-link class="c-Navbar__link" to="/about">About</router-link>
-    <BaseButton>faggot</BaseButton>
+    <BaseButton as="link" href="/">Schedule an Event</BaseButton>
+    <BaseButton as="link" variant="ghost" href="/about">About</BaseButton>
   </nav>
 </template>
 
