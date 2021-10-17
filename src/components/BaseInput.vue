@@ -2,10 +2,12 @@
 interface Props {
   value?: string;
   label: string;
+  type?: "text" | "time";
 }
-// v-bind="props"
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  type: "text",
+});
 const emits = defineEmits(["input"]);
 
 const onInput = (event: any) => {
@@ -16,7 +18,12 @@ const onInput = (event: any) => {
 <template>
   <div class="c-InputWrapper">
     <label for="" class="c-InputLabel">{{ label }}</label>
-    <input type="text" :value="props.value" @input="onInput" class="c-Input" />
+    <input
+      :value="props.value"
+      @input="onInput"
+      class="c-Input"
+      :type="props.type"
+    />
   </div>
 </template>
 
@@ -24,6 +31,7 @@ const onInput = (event: any) => {
 .c-InputWrapper {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .c-InputLabel {

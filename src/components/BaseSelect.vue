@@ -1,6 +1,7 @@
 <script setup lang="ts">
 interface Props {
   value: string;
+  label: string;
 }
 const props = defineProps<Props>();
 const emits = defineEmits(["change"]);
@@ -12,20 +13,34 @@ const onChange = (event: any) => {
 </script>
 
 <template>
-  <select :value="props.value" @change="onChange" class="c-BaseSelect">
-    <slot></slot>
-  </select>
+  <div class="c-SelectWrapper">
+    <label class="c-SelectLabel">{{ label }}</label>
+    <select :value="props.value" @change="onChange" class="c-BaseSelect">
+      <slot></slot>
+    </select>
+  </div>
 </template>
 
 <style scope>
+.c-SelectWrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.c-SelectLabel {
+  font-size: 0.8rem;
+  margin-bottom: 0.3rem;
+}
+
 .c-BaseSelect {
-  border: none;
-  border-bottom: 1px solid var(--black-10);
+  border: 1px solid var(--black-10);
+  border-radius: 3px;
   color: var(--black-60);
-  display: inline-block;
   font-size: 1rem;
   outline: none;
-  padding: 0.2rem 0;
-  text-align: center;
+  padding: 0.5rem 0.7rem;
+  transition: 0.2s ease;
+  width: 100%;
 }
 </style>

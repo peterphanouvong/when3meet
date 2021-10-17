@@ -14,7 +14,7 @@ import EventCreateForm from "./EventCreateForm.vue";
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  max-width: 400px;
+  max-width: 600px;
   margin: auto;
   padding: 1rem;
 }

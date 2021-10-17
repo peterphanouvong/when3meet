@@ -3,8 +3,10 @@ import Navbar from "./Navbar.vue";
 </script>
 
 <template>
-  <Navbar />
-  <h1>About page</h1>
+  <div class="container">
+    <Navbar />
+    <h1>About page</h1>
+  </div>
 </template>
 
 <style scoped></style>

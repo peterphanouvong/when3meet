@@ -3,18 +3,19 @@ import { ref } from "vue";
 import BaseInput from "./BaseInput.vue";
 import BaseButton from "./BaseButton.vue";
 import BaseSelect from "./BaseSelect.vue";
+import EventCreateWeek from "./EventCreateWeek.vue";
 
 const eventName = ref<string>("");
 const timeType = ref<"week" | "period">("week");
-const startTime = ref("init");
-const endTime = ref("init");
+const startTime = ref("09:00");
+const endTime = ref("20:00");
 
 const onSubmit = () => {
   console.log({
     eventName: eventName.value,
     timeType: timeType.value,
     startTime: startTime.value,
-    endTime: endTime.value
+    endTime: endTime.value,
   });
 };
 </script>
@@ -29,28 +30,34 @@ const onSubmit = () => {
       type="text"
     />
 
-    <p class="c-EventCreateForm__item">
-      When are you free
-      <BaseSelect :value="timeType" @change="timeType = $event">
-        <option value="week">during the week</option>
-        <option value="period">in this time period</option>
-      </BaseSelect>
-      ?
-    </p>
+    <BaseSelect
+      label="When do you want to meet?"
+      :value="timeType"
+      @change="timeType = $event"
+    >
+      <option value="week">On a weekly basis</option>
+      <option value="period">Select specific dates</option>
+    </BaseSelect>
 
-    <p class="c-EventCreateForm__item">
-      No earlier than
-      <BaseSelect :value="startTime" @change="startTime = $event">
-        <option value="init">9:00am</option>
-      </BaseSelect>
-    </p>
+    <EventCreateWeek v-if="timeType === 'week'" />
 
-    <p class="c-EventCreateForm__item">
-      No later than
-      <BaseSelect :value="endTime" @change="endTime = $event">
-        <option value="init">10:00pm</option>
-      </BaseSelect>
-    </p>
+    <div class="c-EventCreateForm__time c-EventCreateForm__item">
+      <BaseInput
+        :value="startTime"
+        @input="startTime = $event"
+        label="No earlier than"
+        type="time"
+      />
+
+      <div class="spacer"></div>
+
+      <BaseInput
+        :value="endTime"
+        @input="endTime = $event"
+        label="No later than"
+        type="time"
+      />
+    </div>
 
     <BaseButton class="c-EventCreateForm__item" type="submit"
       >Create event!</BaseButton
@@ -63,10 +70,14 @@ const onSubmit = () => {
   width: 100%;
 }
 .c-EventCreateForm__item {
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .c-EventCreateForm__title {
   align-self: center;
+}
+
+.c-EventCreateForm__time {
+  display: flex;
 }
 </style>

@@ -4,8 +4,10 @@ import HomePage from "./components/HomePage.vue";
 </script>
 
 <template>
-  <Navbar />
-  <HomePage />
+  <div class="container">
+    <Navbar />
+    <HomePage />
+  </div>
 </template>
 
 <style>
@@ -46,5 +48,14 @@ html {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.container {
+  max-width: 1440px;
+  margin: auto;
+}
+
+.spacer {
+  margin-left: 1rem;
 }
 </style>
