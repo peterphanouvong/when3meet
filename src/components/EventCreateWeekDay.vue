@@ -2,61 +2,58 @@
 interface Props {
   value: boolean;
   name: string;
-  toggleCheckbox: (arg0: string) => void;
 }
 
 const props = defineProps<Props>();
+const emits = defineEmits(["toggle"]);
+
+const onToggle = () => {
+  emits("toggle", props.name);
+};
 </script>
 
 <template>
-  <li class="c-Weekday">
-    <input class="c-Checkbox" type="checkbox" :value="props.value" />
-    <span @click="() => toggleCheckbox(props.name)" class="c-CheckboxLabel"
-      >{{ props.name }} {{ props.value }}</span
-    >
+  <li
+    @click="onToggle"
+    :class="['c-Weekday', props.value && 'c-Weekday--active']"
+  >
+    <span>{{ props.name.slice(0, 1) }}</span>
   </li>
 </template>
 
 <style scoped>
 .c-Weekday {
-  display: flex;
   align-items: center;
+  background-color: white;
+  border: 1px solid var(--black-30);
+  border-radius: 50%;
+  color: var(--black-30);
+  cursor: pointer;
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
   margin-bottom: 0.5rem;
   padding: 0.5rem;
+  transition: 0.2s ease;
+  width: 2.5rem;
 }
 
-.c-Checkbox {
-  height: 0.9rem;
-  width: 0.9rem;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  border: 1px solid var(--black-20);
-  border-radius: 3px;
-  outline: none;
-  transition-duration: 0.2s ease;
-  background-color: white;
-  cursor: pointer;
+.c-Weekday:hover {
+  background-color: var(--black-0);
+  border-color: var(--black-40);
+  color: var(--black-40);
+  transition: 0.2s ease;
 }
 
-.c-Checkbox:checked {
-  background-color: var(--black-10);
-  position: relative;
-}
-.c-Checkbox:checked::before {
-  content: "\2713";
-  color: var(--black-50);
-  display: block;
-  font-size: 0.7rem;
-  position: absolute;
-  text-align: center;
-  top: -0.05rem;
-  left: 0.1rem;
+.c-Weekday--active {
+  background-color: var(--black-5);
+  border-color: var(--black-60);
+  color: var(--black-60);
 }
 
-.c-CheckboxLabel {
-  cursor: pointer;
-  margin-left: 0.3rem;
+.c-Weekday--active:hover {
+  background-color: var(--black-5);
+  border-color: var(--black-60);
+  color: var(--black-60);
 }
 </style>

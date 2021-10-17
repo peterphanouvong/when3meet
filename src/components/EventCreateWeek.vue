@@ -1,19 +1,21 @@
 <script setup lang="ts">
 import EventCreateWeekDay from "./EventCreateWeekDay.vue";
-const selectedDays = {
+import { ref } from "vue";
+
+const selectedDays = ref({
   Monday: true,
   Tuesday: true,
   Wednesday: true,
   Thursday: true,
   Friday: true,
-  Saturday: true,
-  Sunday: true,
-};
+  Saturday: false,
+  Sunday: false
+});
 
-const toggleCheckbox = (day: string) => {
+const onToggle = (e: any) => {
   //@ts-ignore
-  selectedDays[day] = !selectedDays[day];
-  console.log(selectedDays);
+  selectedDays.value[e] = !selectedDays.value[e];
+  console.log(selectedDays.value);
 };
 </script>
 
@@ -23,16 +25,18 @@ const toggleCheckbox = (day: string) => {
       v-for="(value, name) in selectedDays"
       :value="value"
       :name="name"
-      :toggleCheckbox="toggleCheckbox"
+      @toggle="onToggle"
     />
   </ul>
 </template>
 
 <style scoped>
 .c-Week {
-  padding: 0.5rem;
+  display: flex;
+  justify-content: space-between;
   margin: 0.5rem 0;
-  border: 1px solid var(--black-10);
-  border-radius: 3px;
+  padding: 0.5rem;
+  /* border: 1px solid var(--black-10); */
+  /* border-radius: 3px; */
 }
 </style>

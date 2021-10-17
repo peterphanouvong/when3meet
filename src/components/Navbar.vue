@@ -5,7 +5,7 @@ import BaseButton from "./BaseButton.vue";
 <template>
   <nav class="c-Navbar">
     <BaseButton as="link" variant="outline" href="/"
-      >Schedule an Event</BaseButton
+      >Schedule an event</BaseButton
     >
     <BaseButton as="link" variant="ghost" href="/about">About</BaseButton>
   </nav>
