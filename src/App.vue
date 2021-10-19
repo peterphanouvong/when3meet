@@ -26,6 +26,8 @@ import HomePage from "./components/HomePage.vue";
   --black-10: #b8c6c0;
   --black-5: #d4ddd7;
   --black-0: #ebeeee;
+
+  --error: #e23636;
 }
 
 #app {

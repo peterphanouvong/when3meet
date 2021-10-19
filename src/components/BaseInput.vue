@@ -70,11 +70,11 @@ console.log(props.error);
 }
 
 .c-Input--error {
-  border-color: #e23636;
+  border-color: var(--error);
 }
 
 .c-Input__error {
-  color: #e23636;
+  color: var(--error);
   font-size: 0.8rem;
   margin-top: 0.3rem;
 }

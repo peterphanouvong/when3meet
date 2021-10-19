@@ -30,16 +30,11 @@ const onSubmit = async () => {
     endTime: endTime.value
   });
 
-  if (eventName.value.trim() === "") {
-    // alert("Your event should have a name!");
-    error.value = {
-      field: "eventName",
-      message: "Your event should have a name!"
-    };
-    return;
-  }
+  const newEvent = {
+    title: eventName.value === "" ? "An untitled event" : eventName.value
+  };
 
-  const res = await createEvent({ title: eventName.value });
+  const res = await createEvent(newEvent);
 
   if (res) {
     router.push(`/event/${res.data.createEvent}`);
