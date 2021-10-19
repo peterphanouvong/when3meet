@@ -5,12 +5,13 @@ interface Props {
   as?: "button" | "link";
   variant?: "solid" | "ghost" | "outline";
   href?: string;
+  size?: "small";
 }
 
 const props = withDefaults(defineProps<Props>(), {
   as: "button",
   href: "",
-  variant: "solid"
+  variant: "solid",
 });
 </script>
 
@@ -21,7 +22,8 @@ const props = withDefaults(defineProps<Props>(), {
       props.variant == 'solid' && 'c-BaseButton--solid',
       props.variant == 'outline' && 'c-BaseButton--outline',
       props.variant == 'ghost' && 'c-BaseButton--ghost',
-      'c-BaseButton'
+      props.size == 'small' && 'c-BaseButton--small',
+      'c-BaseButton',
     ]"
   >
     <slot></slot>
@@ -33,7 +35,8 @@ const props = withDefaults(defineProps<Props>(), {
       props.variant == 'solid' && 'c-BaseButton--solid',
       props.variant == 'outline' && 'c-BaseButton--outline',
       props.variant == 'ghost' && 'c-BaseButton--ghost',
-      'c-BaseButton'
+      props.size == 'small' && 'c-BaseButton--small',
+      'c-BaseButton',
     ]"
     :to="props.href"
     ><slot></slot
@@ -66,6 +69,7 @@ const props = withDefaults(defineProps<Props>(), {
 .c-BaseButton--ghost {
   background-color: transparent;
   color: var(--black-40);
+  border: none;
 }
 .c-BaseButton--ghost:hover {
   background-color: var(--black-0);
@@ -79,5 +83,10 @@ const props = withDefaults(defineProps<Props>(), {
 
 .c-BaseButton--outline:hover {
   background-color: var(--black-0);
+}
+
+.c-BaseButton--small {
+  font-size: 0.8rem;
+  padding: 0.4rem 0.8rem;
 }
 </style>

@@ -1,42 +1,69 @@
 <script setup lang="ts">
 import EventCreateWeekDay from "./EventCreateWeekDay.vue";
 import { ref } from "vue";
+import BaseButton from "./BaseButton.vue";
 
 const selectedDays = ref({
   Monday: true,
-  Tuesday: true,
-  Wednesday: true,
-  Thursday: true,
-  Friday: true,
+  Tuesday: false,
+  Wednesday: false,
+  Thursday: false,
+  Friday: false,
   Saturday: false,
-  Sunday: false
+  Sunday: false,
 });
 
 const onToggle = (e: any) => {
   //@ts-ignore
   selectedDays.value[e] = !selectedDays.value[e];
-  console.log(selectedDays.value);
+};
+
+const selectAll = () => {
+  for (const x in selectedDays.value) {
+    //@ts-ignore
+    selectedDays.value[x] = true;
+  }
 };
 </script>
 
 <template>
-  <ul class="c-Week">
-    <EventCreateWeekDay
-      v-for="(value, name) in selectedDays"
-      :value="value"
-      :name="name"
-      @toggle="onToggle"
-    />
-  </ul>
+  <div class="c-Week">
+    <div class="c-Week__subtitle-wrapper">
+      <p class="c-Week__subtitle">Select days:</p>
+      <BaseButton type="button" size="small" variant="ghost" @click="selectAll"
+        >Select all</BaseButton
+      >
+    </div>
+
+    <ul class="c-Week__list">
+      <EventCreateWeekDay
+        v-for="(value, name) in selectedDays"
+        :value="value"
+        :name="name"
+        @toggle="onToggle"
+      />
+    </ul>
+  </div>
 </template>
 
 <style scoped>
 .c-Week {
+  padding: 1rem;
+}
+.c-Week__list {
   display: flex;
   justify-content: space-between;
-  margin: 0.5rem 0;
-  padding: 0.5rem;
-  /* border: 1px solid var(--black-10); */
-  /* border-radius: 3px; */
+  margin-bottom: 0.5rem;
+}
+
+.c-Week__subtitle {
+  font-size: 0.8rem;
+}
+
+.c-Week__subtitle-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
 }
 </style>

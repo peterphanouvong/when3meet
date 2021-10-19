@@ -1,27 +1,58 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useMutation } from "@vue/apollo-composable";
 import BaseInput from "./BaseInput.vue";
 import BaseButton from "./BaseButton.vue";
 import BaseSelect from "./BaseSelect.vue";
 import EventCreateWeek from "./EventCreateWeek.vue";
+import { gql } from "@apollo/client/core";
+import { useRouter } from "vue-router";
 
 const eventName = ref<string>("");
 const timeType = ref<"week" | "period">("week");
 const startTime = ref("09:00");
 const endTime = ref("20:00");
+const error = ref<undefined | { field: string; message: string }>();
 
-const onSubmit = () => {
+const router = useRouter();
+
+const { mutate: createEvent } = useMutation(gql`
+  mutation createEvent($title: String!) {
+    createEvent(title: $title)
+  }
+`);
+
+const onSubmit = async () => {
   console.log({
     eventName: eventName.value,
     timeType: timeType.value,
     startTime: startTime.value,
     endTime: endTime.value,
   });
+
+  if (eventName.value.trim() === "") {
+    // alert("Your event should have a name!");
+    error.value = {
+      field: "eventName",
+      message: "Your event should have a name!",
+    };
+    return;
+  }
+
+  const res = await createEvent({ title: eventName.value });
+
+  if (res) {
+    router.push(`/event/${res.data.createEvent}`);
+  }
 };
 </script>
 
 <template>
   <form class="c-EventCreateForm" @submit.prevent="onSubmit">
+    <div v-if="error">
+      {{ error.message }}
+    </div>
+
     <BaseInput
       class="c-EventCreateForm__item c-EventCreateForm__title"
       :value="eventName"

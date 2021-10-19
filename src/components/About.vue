@@ -1,5 +1,18 @@
 <script setup lang="ts">
 import Navbar from "./Navbar.vue";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+
+const { result } = useQuery(gql`
+  query {
+    events {
+      id
+      title
+    }
+  }
+`);
+
+console.log(result.value);
 </script>
 
 <template>
