@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
-
 interface Props {
   as?: "button" | "link";
   variant?: "solid" | "ghost" | "outline";
@@ -11,7 +9,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   as: "button",
   href: "",
-  variant: "solid",
+  variant: "solid"
 });
 </script>
 
@@ -23,7 +21,7 @@ const props = withDefaults(defineProps<Props>(), {
       props.variant == 'outline' && 'c-BaseButton--outline',
       props.variant == 'ghost' && 'c-BaseButton--ghost',
       props.size == 'small' && 'c-BaseButton--small',
-      'c-BaseButton',
+      'c-BaseButton'
     ]"
   >
     <slot></slot>
@@ -36,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
       props.variant == 'outline' && 'c-BaseButton--outline',
       props.variant == 'ghost' && 'c-BaseButton--ghost',
       props.size == 'small' && 'c-BaseButton--small',
-      'c-BaseButton',
+      'c-BaseButton'
     ]"
     :to="props.href"
     ><slot></slot

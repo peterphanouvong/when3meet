@@ -3,16 +3,19 @@ interface Props {
   value?: string;
   label: string;
   type?: "text" | "time";
+  error?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  type: "text",
+  type: "text"
 });
 const emits = defineEmits(["input"]);
 
 const onInput = (event: any) => {
   emits("input", event.target.value);
 };
+
+console.log(props.error);
 </script>
 
 <template>
@@ -21,9 +24,12 @@ const onInput = (event: any) => {
     <input
       :value="props.value"
       @input="onInput"
-      class="c-Input"
+      :class="[props.error && 'c-Input--error', 'c-Input']"
       :type="props.type"
     />
+    <div v-if="props.error" class="c-Input__error">
+      {{ props.error }}
+    </div>
   </div>
 </template>
 
@@ -61,5 +67,15 @@ const onInput = (event: any) => {
 
 .c-Input::placeholder {
   color: var(--black-10);
+}
+
+.c-Input--error {
+  border-color: #e23636;
+}
+
+.c-Input__error {
+  color: #e23636;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
 }
 </style>

@@ -27,14 +27,14 @@ const onSubmit = async () => {
     eventName: eventName.value,
     timeType: timeType.value,
     startTime: startTime.value,
-    endTime: endTime.value,
+    endTime: endTime.value
   });
 
   if (eventName.value.trim() === "") {
     // alert("Your event should have a name!");
     error.value = {
       field: "eventName",
-      message: "Your event should have a name!",
+      message: "Your event should have a name!"
     };
     return;
   }
@@ -49,16 +49,13 @@ const onSubmit = async () => {
 
 <template>
   <form class="c-EventCreateForm" @submit.prevent="onSubmit">
-    <div v-if="error">
-      {{ error.message }}
-    </div>
-
     <BaseInput
       class="c-EventCreateForm__item c-EventCreateForm__title"
       :value="eventName"
       @input="eventName = $event"
       label="Event name"
       type="text"
+      :error="error?.field == 'eventName' ? error.message : undefined"
     />
 
     <BaseSelect
